@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Log file location
-LOG_FILE="/home/andrew/taszker/logs/app.log"
+LOG_FILE="logs/app.log"
 
 # Define color codes for different log types
 COLOR_RESET="\e[0m"
@@ -24,22 +24,24 @@ process_logs() {
     tail -f "$LOG_FILE" | while read -r line; do
         # Extract log level based on case-insensitive matching (INFO, SUCCESS, ERROR, WARNING)
         if [[ "$line" =~ [Ii]nfo ]]; then
-            echo -e "${COLOR_INFO}$line${COLOR_RESET}"
+            # Increase info count
             ((INFO_COUNT++))
+            echo -e "${COLOR_INFO}$line${COLOR_RESET}" # Display the line in cyan
         elif [[ "$line" =~ [Ss]uccess ]]; then
-            echo -e "${COLOR_SUCCESS}$line${COLOR_RESET}"
+            # Increase success count
             ((SUCCESS_COUNT++))
+            echo -e "${COLOR_SUCCESS}$line${COLOR_RESET}" # Display the line in green
         elif [[ "$line" =~ [Ee]rror ]]; then
-            echo -e "${COLOR_ERROR}$line${COLOR_RESET}"
+            # Increase error count
             ((ERROR_COUNT++))
+            echo -e "${COLOR_ERROR}$line${COLOR_RESET}" # Display the line in red
         elif [[ "$line" =~ [Ww]arning ]]; then
-            echo -e "${COLOR_WARNING}$line${COLOR_RESET}"
+            # Increase warning count
             ((WARNING_COUNT++))
-        else
-            echo -e "$line"  # Display the line as is if no match
+            echo -e "${COLOR_WARNING}$line${COLOR_RESET}" # Display the line in yellow
         fi
 
-        # Display counters live without overwriting
+        # Print live counters only once after processing the line (without excessive repetition)
         print_live_counters
 
         # Print summary if there are errors or if warnings exceed threshold
@@ -49,9 +51,10 @@ process_logs() {
     done
 }
 
-# Function to print live counters (using a carriage return to avoid overwriting)
+# Function to print live counters (only once per line, not repeatedly)
 print_live_counters() {
-    echo -e "\r${COLOR_HEADER}Live Log Counters: INFO=$INFO_COUNT SUCCESS=$SUCCESS_COUNT ERROR=$ERROR_COUNT WARNING=$WARNING_COUNT${COLOR_RESET}"
+    # Clear the terminal line before printing (to update without clutter)
+    echo -ne "\r${COLOR_HEADER}Live Log Counters: INFO=$INFO_COUNT SUCCESS=$SUCCESS_COUNT ERROR=$ERROR_COUNT WARNING=$WARNING_COUNT${COLOR_RESET}"
 }
 
 # Function to print a summary of the log counts
