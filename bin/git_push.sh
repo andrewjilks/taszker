@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Source the timestamping script correctly
-source "$(dirname "$0")/timestamp_log.sh"
-
 # Ensure we're in the project root directory
 cd "$(git rev-parse --show-toplevel)"
+
+# Source the timestamp_log function
+source "$(dirname "$0")/timestamp_log.sh"  # This line ensures the timestamp_log function is sourced correctly
 
 # Show current git status for debugging purposes and log it
 timestamp_log "Current Git Status:"
