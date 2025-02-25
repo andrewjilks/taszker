@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Source the timestamping script
-source ./bin/timestamp_log.sh
+# Source the timestamping script correctly
+source "$(dirname "$0")/timestamp_log.sh"
 
 # Ensure we're in the project root directory
 cd "$(git rev-parse --show-toplevel)"
