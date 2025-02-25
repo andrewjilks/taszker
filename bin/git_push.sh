@@ -20,17 +20,17 @@ if [[ $(git status --porcelain) ]]; then
 
     # Commit changes with a default message
     git commit -m "Auto-commit: updates"
-
-    # Push to the remote repository
-    echo "Pushing to remote repository..."
-    git push origin main
-
-    # Check if the push was successful
-    if [ $? -eq 0 ]; then
-        echo "Push successful!"
-    else
-        echo "Push failed."
-    fi
 else
     echo "No changes detected. Nothing to commit."
+fi
+
+# Push to the remote repository
+echo "Pushing to remote repository..."
+git push origin main
+
+# Check if the push was successful
+if [ $? -eq 0 ]; then
+    echo "Push successful!"
+else
+    echo "Push failed."
 fi
