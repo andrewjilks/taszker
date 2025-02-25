@@ -162,3 +162,40 @@ no changes added to commit (use "git add" and/or "git commit -a")
 [2025-02-25 15:09:23] Latest commit hash:
 fd07d9ce58f769a9d923e9defa1b3ab9ba0c63df
 [2025-02-25 15:09:23] Changes detected. Adding and committing files.
+[2025-02-25 15:09:23] Staged files:
+bin/git_push.sh
+bin/log_cleanup.sh
+bin/setup.sh
+bin/timestamp_log.sh
+logs/app.log
+tests/test.sh
+[main 9139568] Auto-commit: updates
+ 6 files changed, 67 insertions(+), 12 deletions(-)
+[2025-02-25 15:09:23] Push attempt time:
+Tue Feb 25 15:09:23 EST 2025
+[2025-02-25 15:09:23] Pushing to remote repository...
+To github.com:andrewjilks/taszker.git
+   fd07d9c..9139568  main -> main
+[2025-02-25 15:09:24] Push successful!
+[0;32m[2025-02-25 15:13:21] [INFO] Starting Git Push...[0m
+[0;32m[2025-02-25 15:13:21] [INFO] Current Git Status:[0m
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   bin/git_push.sh
+	modified:   bin/timestamp_log.sh
+	modified:   logs/app.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[0;32m[2025-02-25 15:13:21] [INFO] Current branch:[0m
+* main
+[0;32m[2025-02-25 15:13:21] [INFO] Git status (detailed):[0m
+ M bin/git_push.sh
+ M bin/timestamp_log.sh
+ M logs/app.log
+[0;32m[2025-02-25 15:13:21] [INFO] Latest commit hash:[0m
+913956826c61106472446cd4a156ce1b93f627a5
+[0;33m[2025-02-25 15:13:21] [WARNING] Changes detected. Adding and committing files.[0m
