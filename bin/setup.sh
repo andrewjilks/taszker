@@ -1,5 +1,10 @@
 #!/bin/bash
-echo "Setting up the app..." >> logs/app.log
+
+# Source the timestamping script
+source ./bin/timestamp_log.sh
+
+# Use the timestamp_log function for logging
+timestamp_log "Setting up the app..."
 mkdir -p logs
 touch logs/app.log
-echo "App setup complete." >> logs/app.log
+timestamp_log "App setup complete."

@@ -1,4 +1,9 @@
 #!/bin/bash
-echo "Starting the application..." >> logs/app.log
+
+# Source the timestamping script
+source ./bin/timestamp_log.sh
+
+# Use the timestamp_log function for logging
+timestamp_log "Starting the application..."
 ./bin/setup.sh
-echo "Application started successfully!" >> logs/app.log
+timestamp_log "Application started successfully!"

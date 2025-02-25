@@ -1,7 +1,12 @@
 #!/bin/bash
-echo "Running tests..." >> logs/app.log
+
+# Source the timestamping script
+source ./bin/timestamp_log.sh
+
+# Use the timestamp_log function for logging
+timestamp_log "Running tests..."
 if ./src/main.sh; then
-    echo "Test passed!" >> logs/app.log
+    timestamp_log "Test passed!"
 else
-    echo "Test failed!" >> logs/app.log
+    timestamp_log "Test failed!"
 fi
