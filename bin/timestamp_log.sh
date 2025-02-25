@@ -1,40 +1,36 @@
 #!/bin/bash
 
-# Define colors for log levels
-RED='\033[0;31m'      # Error
-GREEN='\033[0;32m'    # Success
-YELLOW='\033[1;33m'   # Warning
-BLUE='\033[0;34m'     # Info
-RESET='\033[0m'       # Reset color
+# Define log file location (adjust as needed)
+LOG_FILE="logs/app.log"
 
-# Function to log messages with timestamp and color
+# Define color codes for different log types
+COLOR_RESET="\e[0m"
+COLOR_TIMESTAMP="\e[1;37m" # White
+COLOR_INFO="\e[0;36m" # Cyan
+COLOR_SUCCESS="\e[0;32m" # Green
+COLOR_WARNING="\e[0;33m" # Yellow
+COLOR_ERROR="\e[0;31m" # Red
+COLOR_HEADER="\e[1;34m" # Blue
+
+# Function to log with a timestamp
 timestamp_log() {
-    # Get the current date and time
-    local timestamp=$(date "+[%Y-%m-%d %H:%M:%S]")
-    
-    # Get log level and message
-    local message="$1"
-    local level="$2"
-
-    # Set color based on the log level
-    case $level in
-        "ERROR")
-            color=$RED
-            ;;
-        "SUCCESS")
-            color=$GREEN
-            ;;
-        "WARNING")
-            color=$YELLOW
-            ;;
-        "INFO")
-            color=$BLUE
-            ;;
-        *)
-            color=$RESET
-            ;;
-    esac
-
-    # Print the timestamped, color-coded message
-    echo -e "${timestamp} ${color}${message}${RESET}" >> logs/app.log
+    local message=$1
+    local color=$2
+    echo -e "${COLOR_TIMESTAMP}[$(date +'%Y-%m-%d %H:%M:%S')]${COLOR_RESET} ${color}$message${COLOR_RESET}" | tee -a "$LOG_FILE"
 }
+
+# Function to log with a header divider
+log_header() {
+    local message=$1
+    echo -e "${COLOR_HEADER}==================== ${message} ====================${COLOR_RESET}" | tee -a "$LOG_FILE"
+}
+
+# Start logging
+log_header "Starting the application..."
+timestamp_log "Application started successfully!" "$COLOR_SUCCESS"
+
+# Add your application-specific logs here (without Git)
+timestamp_log "Application logic running..." "$COLOR_INFO"
+# Example of additional logging (e.g., monitoring application state)
+timestamp_log "Application is still running smoothly!" "$COLOR_SUCCESS"
+timestamp_log "Application process completed." "$COLOR_HEADER"

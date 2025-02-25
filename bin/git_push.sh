@@ -1,33 +1,38 @@
 #!/bin/bash
 
-# Source timestamp_log script
+# Define color codes for different log types
+COLOR_RESET="\e[0m"
+COLOR_TIMESTAMP="\e[1;37m" # White
+COLOR_INFO="\e[0;36m" # Cyan
+COLOR_SUCCESS="\e[0;32m" # Green
+COLOR_WARNING="\e[0;33m" # Yellow
+COLOR_ERROR="\e[0;31m" # Red
+COLOR_HEADER="\e[1;34m" # Blue
+
+# Include timestamp_log.sh for logging
 source ./bin/timestamp_log.sh
 
-# Start the git push process and log
-timestamp_log "Starting the application..." "INFO"
+# Start the process
+log_header "Starting the Git push process..."
+timestamp_log "Application started for Git operations!" "$COLOR_SUCCESS"
 
-# Display the current git status
-timestamp_log "Current Git Status:" "INFO"
-git status >> logs/app.log 2>&1
+# Check Git status
+timestamp_log "Current Git Status:" "$COLOR_INFO"
+git status | tail -n 10
 
-# Check if there are changes to commit
-if git diff-index --quiet HEAD --; then
-    timestamp_log "No changes to commit. Pushing current status." "INFO"
-else
-    timestamp_log "Changes detected. Adding and committing files." "INFO"
-    git add . >> logs/app.log 2>&1
-    git commit -m "Auto-commit: updates" >> logs/app.log 2>&1
-fi
+# Adding and committing files
+timestamp_log "Changes detected. Adding and committing files." "$COLOR_INFO"
+git add . && git commit -m "Auto-commit: updates" 2>&1 | tee -a logs/app.log
 
-# Push the changes to the repository
-timestamp_log "Pushing to remote repository..." "INFO"
-git push origin main >> logs/app.log 2>&1
+# Pushing to remote repository
+timestamp_log "Pushing to remote repository..." "$COLOR_INFO"
+git push 2>&1 | tee -a logs/app.log
 
-# Log the push status
-timestamp_log "Push successful!" "SUCCESS"
+# Success message after push
+timestamp_log "Push successful!" "$COLOR_SUCCESS"
 
-# Display current git status after push
-timestamp_log "Current Git Status:" "INFO"
-git status >> logs/app.log 2>&1
+# Final git status output
+timestamp_log "Final Git Status:" "$COLOR_INFO"
+git status | tail -n 10
 
-timestamp_log "Git push process complete." "INFO"
+timestamp_log "Git push process complete." "$COLOR_HEADER"
