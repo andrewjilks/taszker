@@ -5,14 +5,14 @@ cd "$(git rev-parse --show-toplevel)"
 
 # Show current git status for debugging purposes
 echo "Current Git Status:" >> logs/app.log
-git status
+git status >> logs/app.log
 
 # Check if there are any changes to commit
 if [[ $(git status --porcelain) ]]; then
     echo "Changes detected. Adding and committing files." >> logs/app.log
 
     # Add all changes
-    git add .
+    git add . >> logs/app.log
 
     # Show which files are staged
     echo "Staged files:" >> logs/app.log
