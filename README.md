@@ -58,3 +58,68 @@ The project can be developed further by adding the following features:
 - Implement additional automation or integrations
 
 To contribute, feel free to fork the repo, make changes, and create pull requests!
+
+## Setup
+
+To get started with this project, follow these steps:
+
+1. Clone the repository to your local machine:
+
+   ```bash
+
+   git clone https://github.com/andrewjilks/taszker.git
+
+   ```
+
+2. Navigate into the project folder:
+
+   ```bash
+
+   cd taszker
+
+   ```
+
+3. Ensure the required dependencies are installed (if applicable).
+
+   This project does not have external dependencies as of now.
+
+4. Make sure all scripts are executable:
+
+   ```bash
+
+   chmod +x bin/*.sh
+
+   ```
+
+
+## Git Handling Features
+
+This project includes a convenient script for handling Git operations.
+
+The  script automates the following tasks:
+
+1. Checks for changes in the repository.
+
+2. Stages and commits any changes automatically.
+
+3. Pushes the committed changes to the remote repository on GitHub.
+
+
+### Usage
+
+To use the Git handling script, follow these steps:
+
+1. Run the  script:
+
+   ```bash
+
+   ./bin/git_push.sh
+
+   ```
+
+2. The script will automatically add, commit, and push any changes to the remote repository.
+
+3. If you have any uncommitted changes, it will stage and commit them before pushing.
+
+4. If there are no changes detected, it will inform you that there is nothing to commit.
+
