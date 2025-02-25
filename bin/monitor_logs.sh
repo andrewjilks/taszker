@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Log file location
-LOG_FILE="logs/app.log"
+LOG_FILE="/home/andrew/taszker/logs/app.log"
 
 # Define color codes for different log types
 COLOR_RESET="\e[0m"
