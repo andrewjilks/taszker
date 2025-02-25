@@ -22,17 +22,17 @@ WARNING_THRESHOLD=5  # Display summary if there are more than 5 warnings
 # Function to process logs in real-time
 process_logs() {
     tail -f "$LOG_FILE" | while read -r line; do
-        # Display log line with color coding
-        if [[ "$line" == *"INFO"* ]]; then
+        # Extract log level based on common patterns (e.g., INFO, SUCCESS, ERROR, WARNING)
+        if [[ "$line" =~ INFO ]]; then
             echo -e "${COLOR_INFO}$line${COLOR_RESET}"
             ((INFO_COUNT++))
-        elif [[ "$line" == *"SUCCESS"* ]]; then
+        elif [[ "$line" =~ SUCCESS ]]; then
             echo -e "${COLOR_SUCCESS}$line${COLOR_RESET}"
             ((SUCCESS_COUNT++))
-        elif [[ "$line" == *"ERROR"* ]]; then
+        elif [[ "$line" =~ ERROR ]]; then
             echo -e "${COLOR_ERROR}$line${COLOR_RESET}"
             ((ERROR_COUNT++))
-        elif [[ "$line" == *"WARNING"* ]]; then
+        elif [[ "$line" =~ WARNING ]]; then
             echo -e "${COLOR_WARNING}$line${COLOR_RESET}"
             ((WARNING_COUNT++))
         else
