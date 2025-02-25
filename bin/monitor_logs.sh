@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Log file location
-LOG_FILE="logs/app.log"
+LOG_FILE="/home/andrew/taszker/logs/app.log"
 
 # Define color codes for different log types
 COLOR_RESET="\e[0m"
@@ -39,7 +39,7 @@ process_logs() {
             echo -e "$line"
         fi
 
-        # Print live counters
+        # Display counters live without overwriting
         print_live_counters
 
         # Print summary if there are errors or if warnings exceed threshold
@@ -49,18 +49,14 @@ process_logs() {
     done
 }
 
-# Function to print live counters
+# Function to print live counters (using a carriage return to avoid overwriting)
 print_live_counters() {
-    echo -e "${COLOR_HEADER}Live Log Counters:${COLOR_RESET}"
-    echo -e "${COLOR_INFO}INFO: $INFO_COUNT${COLOR_RESET}"
-    echo -e "${COLOR_SUCCESS}SUCCESS: $SUCCESS_COUNT${COLOR_RESET}"
-    echo -e "${COLOR_ERROR}ERROR: $ERROR_COUNT${COLOR_RESET}"
-    echo -e "${COLOR_WARNING}WARNING: $WARNING_COUNT${COLOR_RESET}"
+    echo -e "\r${COLOR_HEADER}Live Log Counters: INFO=$INFO_COUNT SUCCESS=$SUCCESS_COUNT ERROR=$ERROR_COUNT WARNING=$WARNING_COUNT${COLOR_RESET}"
 }
 
 # Function to print a summary of the log counts
 print_summary() {
-    echo -e "${COLOR_HEADER}Log Summary:${COLOR_RESET}"
+    echo -e "\n${COLOR_HEADER}Log Summary:${COLOR_RESET}"
     echo -e "${COLOR_INFO}INFO Count: $INFO_COUNT${COLOR_RESET}"
     echo -e "${COLOR_SUCCESS}SUCCESS Count: $SUCCESS_COUNT${COLOR_RESET}"
     echo -e "${COLOR_ERROR}ERROR Count: $ERROR_COUNT${COLOR_RESET}"
