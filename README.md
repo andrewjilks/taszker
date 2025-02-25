@@ -11,6 +11,9 @@ The project follows this directory structure:
 /taszker
 ├── bin/
 │   ├── log_cleanup.sh
+│   └── timestamp_log.sh
+│   └── git_push.sh
+│   └── view_logs.sh
 │   └── setup.sh
 ├── config/
 │   └── app_config.env
@@ -41,6 +44,24 @@ To manually trigger the log cleanup, run the following command:
 ./bin/log_cleanup.sh
 ```
 
+## Log Viewing
+
+Logs can be viewed from the file using the script or also monitored on realtime with the terminal
+
+To manually trigger the log viewer, run the following command:
+```bash
+./bin/view_logs.sh
+```
+
+## Log Formatting
+
+This script automatically formats incoming log data for readability
+
+This script is called automatically from location:
+```bash
+./bin/timestamp_log.sh
+```
+
 ## Running Tests
 
 The test script ensures the application and setup run without issues. To run the tests, execute:
@@ -49,15 +70,6 @@ The test script ensures the application and setup run without issues. To run the
 ```
 
 The test will run the main application and log its status.
-
-## Development and Future Additions
-
-The project can be developed further by adding the following features:
-- Improve logging format (e.g., timestamps, log levels)
-- Add configuration options for the log cleanup (size threshold, retention period)
-- Implement additional automation or integrations
-
-To contribute, feel free to fork the repo, make changes, and create pull requests!
 
 ## Setup
 
