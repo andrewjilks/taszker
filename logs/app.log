@@ -19,3 +19,25 @@ Changes not staged for commit:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 Changes detected. Adding and committing files.
+Staged files:
+Pushing to remote repository...
+Push successful!
+Current Git Status:
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   bin/git_push.sh
+	modified:   logs/app.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Current branch:
+* main
+Git status (detailed):
+ M bin/git_push.sh
+ M logs/app.log
+Latest commit hash:
+56606beeb25020a4dad7875a214ad8c90975f499
+Changes detected. Adding and committing files.
