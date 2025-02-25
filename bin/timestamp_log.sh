@@ -1,31 +1,40 @@
 #!/bin/bash
 
-# Function to add timestamp to logs with color-coding
-timestamp_log() {
-    local message=$1
-    local log_level=$2
-    local timestamp
-    timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+# Define colors for log levels
+RED='\033[0;31m'      # Error
+GREEN='\033[0;32m'    # Success
+YELLOW='\033[1;33m'   # Warning
+BLUE='\033[0;34m'     # Info
+RESET='\033[0m'       # Reset color
 
-    # Set colors based on log level
-    case $log_level in
-        INFO)
-            color="\033[0;32m"  # Green
+# Function to log messages with timestamp and color
+timestamp_log() {
+    # Get the current date and time
+    local timestamp=$(date "+[%Y-%m-%d %H:%M:%S]")
+    
+    # Get log level and message
+    local message="$1"
+    local level="$2"
+
+    # Set color based on the log level
+    case $level in
+        "ERROR")
+            color=$RED
             ;;
-        SUCCESS)
-            color="\033[0;34m"  # Blue
+        "SUCCESS")
+            color=$GREEN
             ;;
-        ERROR)
-            color="\033[0;31m"  # Red
+        "WARNING")
+            color=$YELLOW
             ;;
-        WARNING)
-            color="\033[0;33m"  # Yellow
+        "INFO")
+            color=$BLUE
             ;;
         *)
-            color="\033[0m"     # Default (no color)
+            color=$RESET
             ;;
     esac
 
-    # Format the log with the timestamp and colored log level
-    echo -e "$color[$timestamp] [$log_level] $message\033[0m" >> logs/app.log
+    # Print the timestamped, color-coded message
+    echo -e "${timestamp} ${color}${message}${RESET}" >> logs/app.log
 }

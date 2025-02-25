@@ -1,58 +1,33 @@
 #!/bin/bash
 
-# Ensure we're in the project root directory
-cd "$(git rev-parse --show-toplevel)"
+# Source timestamp_log script
+source ./bin/timestamp_log.sh
 
-# Source the timestamp_log function
-source "$(dirname "$0")/timestamp_log.sh"  # This line ensures the timestamp_log function is sourced correctly
+# Start the git push process and log
+timestamp_log "Starting the application..." "INFO"
 
-# Log the start of the git push process
-timestamp_log "Starting Git Push..." "INFO"
-
-# Show current git status for debugging purposes and log it
+# Display the current git status
 timestamp_log "Current Git Status:" "INFO"
-git status >> logs/app.log
+git status >> logs/app.log 2>&1
 
-# Log the current branch
-timestamp_log "Current branch:" "INFO"
-git branch >> logs/app.log
-
-# Log the status of changes (untracked, modified, etc.)
-timestamp_log "Git status (detailed):" "INFO"
-git status --short >> logs/app.log
-
-# Get the commit hash of the latest commit
-timestamp_log "Latest commit hash:" "INFO"
-git log -1 --format=%H >> logs/app.log
-
-# Check if there are any changes to commit
-if [[ $(git status --porcelain) ]]; then
-    timestamp_log "Changes detected. Adding and committing files." "WARNING"
-
-    # Add all changes
-    git add . >> logs/app.log
-
-    # Show which files are staged
-    timestamp_log "Staged files:" "INFO"
-    git diff --cached --name-only >> logs/app.log
-
-    # Commit changes with a default message
-    git commit -m "Auto-commit: updates" >> logs/app.log
+# Check if there are changes to commit
+if git diff-index --quiet HEAD --; then
+    timestamp_log "No changes to commit. Pushing current status." "INFO"
 else
-    timestamp_log "No changes detected. Nothing to commit." "SUCCESS"
+    timestamp_log "Changes detected. Adding and committing files." "INFO"
+    git add . >> logs/app.log 2>&1
+    git commit -m "Auto-commit: updates" >> logs/app.log 2>&1
 fi
 
-# Log the current date and time of the push attempt
-timestamp_log "Push attempt time:" "INFO"
-date >> logs/app.log
-
-# Push to the remote repository and log the output
+# Push the changes to the repository
 timestamp_log "Pushing to remote repository..." "INFO"
 git push origin main >> logs/app.log 2>&1
 
-# Check if the push was successful and log the result
-if [ $? -eq 0 ]; then
-    timestamp_log "Push successful!" "SUCCESS"
-else
-    timestamp_log "Push failed." "ERROR"
-fi
+# Log the push status
+timestamp_log "Push successful!" "SUCCESS"
+
+# Display current git status after push
+timestamp_log "Current Git Status:" "INFO"
+git status >> logs/app.log 2>&1
+
+timestamp_log "Git push process complete." "INFO"

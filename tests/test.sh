@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# Source the timestamp_log function
-source "$(dirname "$0")/timestamp_log.sh"
+# Source timestamp_log script
+source ./bin/timestamp_log.sh
 
-# Log the start of testing
-timestamp_log "Running tests..."
+# Running tests and logging the process
+timestamp_log "Running tests..." "INFO"
 
-# Run the main script and log the result
+# If the test passes
 if ./src/main.sh; then
-    timestamp_log "Test passed!"
+    timestamp_log "Test passed!" "SUCCESS"
 else
-    timestamp_log "Test failed!"
+    timestamp_log "Test failed!" "ERROR"
 fi
