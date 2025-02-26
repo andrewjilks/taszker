@@ -10,7 +10,7 @@ COLOR_ERROR="\e[0;31m" # Red
 COLOR_HEADER="\e[1;34m" # Blue
 
 # Include timestamp_log.sh for logging
-source ./bin/timestamp_log.sh
+source ./timestamp_log.sh
 
 # Start the process
 log_header "Starting the Git push process..."
