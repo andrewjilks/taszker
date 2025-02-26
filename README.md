@@ -9,21 +9,36 @@ Taszker is a lightweight shell-based application that focuses on managing log fi
 The project follows this directory structure:
 ```
 /taszker
+├── .git/
+│
 ├── bin/
 │   ├── log_cleanup.sh
 │   └── timestamp_log.sh
 │   └── git_push.sh
 │   └── view_logs.sh
 │   └── setup.sh
+│   └── monitor_logs.sh
+│
 ├── config/
 │   └── app_config.env
+│   └── config.h
+│
 ├── logs/
 │   └── app.log
+│
 ├── src/
 │   └── main.sh
+│   └── app.c
+│
 ├── tests/
 │   └── test.sh
+│
+├── include/
+│   └── tasks.h
+|
 └── README.md
+└── tasks.json
+└── taszker_app
 ```
 
 ## Running the Application

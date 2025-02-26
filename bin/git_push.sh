@@ -1,38 +1,30 @@
 #!/bin/bash
+set -e  # Exit immediately if a command fails
 
-# Define color codes for different log types
-COLOR_RESET="\e[0m"
-COLOR_TIMESTAMP="\e[1;37m" # White
-COLOR_INFO="\e[0;36m" # Cyan
-COLOR_SUCCESS="\e[0;32m" # Green
-COLOR_WARNING="\e[0;33m" # Yellow
-COLOR_ERROR="\e[0;31m" # Red
-COLOR_HEADER="\e[1;34m" # Blue
+# Correct log file path
+LOG_FILE="../logs/app.log"
 
-# Include timestamp_log.sh for logging
-source ./timestamp_log.sh
+# Ensure log directory exists
+mkdir -p "$(dirname "$LOG_FILE")"
 
-# Start the process
-log_header "Starting the Git push process..."
-timestamp_log "Application started for Git operations!" "$COLOR_SUCCESS"
+echo "==================== Starting the Git push process... ====================" | tee -a "$LOG_FILE"
 
-# Check Git status
-timestamp_log "Current Git Status:" "$COLOR_INFO"
-git status | tail -n 10
+# Change to the correct Git directory
+cd "$(dirname "$0")/.."
 
-# Adding and committing files
-timestamp_log "Changes detected. Adding and committing files." "$COLOR_INFO"
-git add . && git commit -m "Auto-commit: updates" 2>&1 | tee -a logs/app.log
+# Ensure all changes are staged
+git add -A
 
-# Pushing to remote repository
-timestamp_log "Pushing to remote repository..." "$COLOR_INFO"
-git push 2>&1 | tee -a logs/app.log
+# Check if there are any changes to commit
+if git diff-index --quiet HEAD --; then
+    echo "[INFO] No new changes to commit." | tee -a "$LOG_FILE"
+else
+    echo "[INFO] Committing changes..." | tee -a "$LOG_FILE"
+    git commit -m "Updated project files"
+fi
 
-# Success message after push
-timestamp_log "Push successful!" "$COLOR_SUCCESS"
+# Push changes
+echo "[INFO] Pushing to remote repository..." | tee -a "$LOG_FILE"
+git push origin main | tee -a "$LOG_FILE"
 
-# Final git status output
-timestamp_log "Final Git Status:" "$COLOR_INFO"
-git status | tail -n 10
-
-timestamp_log "Git push process complete." "$COLOR_HEADER"
+echo "[INFO] Git push process complete!" | tee -a "$LOG_FILE"
