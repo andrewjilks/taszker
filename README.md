@@ -4,6 +4,7 @@
 
 Taszker is a lightweight shell-based application that focuses on managing log files and running automated tests. It provides an easy-to-use framework for logging app activity, setting up essential directories, and automating the cleanup of log files based on predefined conditions (e.g., log file size). This tool can be further developed with additional features such as better logging formats, advanced configuration options, or even integrations with other services.
 
+
 ## File Structure
 
 The project follows this directory structure:
@@ -43,12 +44,12 @@ The project follows this directory structure:
 
 ## Running the Application
 
-To start the application, execute the following command:
+To start the application scripting functions, execute the following command:
 ```bash
 ./src/main.sh
 ```
 
-This will start the app, run the setup script, and initialize the log file.
+This will start the scripting functions, run the setup script, and initialize the log file.
 
 ## Log Cleanup
 
